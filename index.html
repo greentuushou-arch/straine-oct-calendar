@@ -20,8 +20,8 @@
   --pumpkin:#E6904A;
   --sun:#C0505A;
   --sat:#4F6D9A;
-  --left:170px;        /* 商品ラベル列 */
-  --lane:58px;         /* 商品1段の高さ */
+  --lane:62px;         /* 帯1段の高さ */
+  --chip:50px;         /* 帯の中の商品写真 */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -43,45 +43,43 @@ img{display:block;max-width:100%}
 
 /* ---------- Calendar ---------- */
 .cal{background:#fff;border-top:3px solid var(--ink);padding:0 16px 18px}
-.dows{display:grid;grid-template-columns:var(--left) repeat(7,minmax(0,1fr));border-bottom:1px solid var(--ink)}
+.dows{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid var(--ink)}
 .dows div{font-family:"Jost";font-weight:500;font-size:14px;letter-spacing:.16em;text-align:center;padding:12px 0}
 .dows .sun{color:var(--sun)}.dows .sat{color:var(--sat)}
 
 .week{border-bottom:1px solid var(--line);padding-bottom:10px}
-.dates{display:grid;grid-template-columns:var(--left) repeat(7,minmax(0,1fr))}
+.dates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
 .date{padding:10px 10px 6px;font-family:"Jost";font-weight:400;font-size:30px;line-height:1;display:flex;align-items:baseline;gap:6px}
 .date.sun,.date.hol{color:var(--sun)}.date.sat{color:var(--sat)}
-.date.out{color:#D9CFD1}
 .date small{font-family:"Noto Sans JP";font-size:11px;font-weight:700}
 
-.lanes{position:relative}
-.lane{display:grid;grid-template-columns:var(--left) 1fr;height:var(--lane);margin-top:4px}
-.lane__label{display:flex;align-items:center;gap:10px;padding-right:10px;min-width:0}
-.lane__imgs{width:52px;height:var(--lane);display:flex;align-items:center;justify-content:center;gap:2px;flex:none}
-.lane__imgs img{max-height:calc(var(--lane) - 4px);max-width:52px;width:auto;height:auto}
-.lane__imgs.two a{flex:1;min-width:0;display:flex;justify-content:center}
-.lane__name{font-weight:700;font-size:14px;line-height:1.3}
-.lane.tall{height:calc(var(--lane) + 14px)}
-.lane.tall .lane__imgs{height:calc(var(--lane) + 14px)}
-.track{position:relative;background:
+.lanes{position:relative;background:
   repeating-linear-gradient(90deg,transparent 0 calc(100% / 7 - 1px),var(--line) calc(100% / 7 - 1px) calc(100% / 7))}
+.lane{position:relative;height:var(--lane);margin-top:5px}
 
-/* 期間の帯。時刻どおりの位置・長さで置く */
-.bar{position:absolute;top:0;bottom:0;display:flex;align-items:center;flex-wrap:wrap;column-gap:10px;row-gap:0;align-content:center;
-  padding:0 12px;color:#fff;font-weight:700;font-size:15px;line-height:1.3;overflow:hidden}
+/* 施策の帯。同じ内容の商品は1本にまとめ、写真を並べる。時刻どおりの位置・長さで置く */
+.bar{position:absolute;top:0;bottom:0;display:flex;align-items:center;gap:12px;
+  padding:0 12px 0 6px;color:#fff;font-weight:700;font-size:15px;line-height:1.3;overflow:hidden}
 .bar.deal{background:var(--rose)}.bar.cpn{background:var(--slate)}
 .bar.head-cut{border-left:3px solid rgba(255,255,255,.55)}
+.bar__imgs{display:flex;gap:3px;flex:none}
+.bar__imgs a{width:var(--chip);height:var(--chip);background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bar__imgs img{max-width:100%;max-height:100%;width:auto;height:auto}
+.bar__txt{display:flex;flex-wrap:wrap;align-items:center;column-gap:10px;min-width:0}
 .bar__v{white-space:nowrap}
 .bar__v b{font-family:"Jost";font-weight:600;font-size:28px;letter-spacing:-.01em;margin-left:3px}
 .bar__plus{white-space:nowrap;word-break:keep-all}
 .bar__plus::before{content:"＋";font-weight:900}
 .bar__t{font-family:"Jost";font-weight:500;font-size:13px;opacity:.9;white-space:nowrap}
 .bar.tiny{justify-content:center;padding:0 4px}
-.bar.narrow{padding:0 8px;font-size:13px}
-.bar.narrow .bar__v b{font-size:22px}
+/* 1日だけの帯などは、写真を上・文字を下に積む */
+.bar.stack{flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:3px 8px;font-size:12px;line-height:1.15}
+.bar.stack .bar__imgs a{width:20px;height:20px}
+.bar.stack .bar__v b{font-size:18px}
+.bar.stack .bar__txt{row-gap:0}
 
-/* 全品の日は、その日の商品段をまとめて覆う */
-.all{position:absolute;top:4px;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:8px}
+/* 全品の日は、その日の段をまとめて覆う */
+.all{position:absolute;top:5px;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:8px}
 .all.one{background:var(--gold)}.all.hw{background:var(--night)}
 .all__tag{font-family:"Jost";font-weight:500;font-size:11px;letter-spacing:.2em;opacity:.85}
 .all__word{font-weight:900;font-size:22px;margin-top:8px;letter-spacing:.1em}
@@ -95,7 +93,7 @@ img{display:block;max-width:100%}
 
 /* ---------- SP ---------- */
 @media (max-width:767px){
-  :root{--left:34px;--lane:42px}
+  :root{--lane:60px;--chip:26px}
   .sp{display:inline}
   .wrap{padding:0 8px}
   .head{padding:32px 6px 20px;grid-template-columns:auto 1fr;column-gap:14px}
@@ -110,15 +108,19 @@ img{display:block;max-width:100%}
   .date{padding:7px 4px 4px;font-size:18px;flex-direction:column;align-items:flex-start;gap:0}
   .date small{font-size:8px}
   .lane{margin-top:3px}
-  .lane__label{padding-right:3px}
-  .lane__imgs{width:31px}
-  .lane__imgs img{max-width:31px}
-  .lane__name{display:none}
-  .bar{padding:0 4px;column-gap:4px;font-size:8.5px;line-height:1.2;letter-spacing:-.03em}
-  .bar__v b{font-size:14px;margin-left:1px}
+  .bar{padding:0 4px 0 3px;gap:5px;font-size:9px;line-height:1.2;letter-spacing:-.03em}
+  .bar__imgs{gap:2px}
+  .bar__txt{column-gap:4px}
+  .bar.col .bar__txt{flex-direction:column;align-items:flex-start}
+  .bar.col .bar__v{display:flex;flex-direction:column;line-height:1.15}
+  .bar.col .bar__v b{margin-left:0}
+  .bar__nu{white-space:nowrap}
+  .bar__v b{font-size:15px;margin-left:1px}
   .bar__t{font-size:8px}
   .bar__plus{white-space:normal}
-  .lane.tall{height:calc(var(--lane) + 16px)}
+  .bar.stack{padding:3px 2px;gap:2px;font-size:8px}
+  .bar.stack .bar__imgs a{width:15px;height:22px}
+  .bar.stack .bar__v b{font-size:13px}
   .all{padding:4px 2px}
   .all__tag{display:none}
   .all__word{font-size:12px;margin-top:0;letter-spacing:0}
@@ -158,6 +160,32 @@ img{display:block;max-width:100%}
   var YEAR=2026, MONTH=10, DAYS=31;
   var HOLIDAYS={12:'スポーツの日'};
 
+  // ---- 商品(写真とリンク) ----
+  var BASE='https://item.rakuten.co.jp/straine-onlineshop/';
+  var P={
+    newSet:   {img:'img/t-new-set.jpg',    url:BASE+'ss-r037/',    alt:'新ライン セット'},
+    newSingle:{img:'img/t-new-single.jpg', url:BASE+'sb-001-004/', alt:'新ライン 単品'},
+    oldSet:   {img:'img/t-old-set.jpg',    url:BASE+'sb-001-001/', alt:'既存ライン セット'},
+    oldSingle:{img:'img/t-old-single.jpg', url:BASE+'sb-001-001/', alt:'既存ライン 単品'},
+    oil:      {img:'img/t-hair-oil.jpg',   url:BASE+'sb-003-001/', alt:'ヘアオイル'},
+    mist:     {img:'img/t-milk-mist.jpg',  url:BASE+'sb-006-001/', alt:'ミルクミスト'}
+  };
+
+  // ---- 施策の内容ごとに商品をまとめる(同じ内容=1本の帯) ----
+  var OFFERS={
+    deal:[
+      {items:['newSet'],               top:'DEALポイント', n:'20', u:'%還元', plus:'ベーシック<wbr>ヘアオイル<wbr>サシェ2包'},
+      {items:['oil','mist'],           top:'DEALポイント', n:'20', u:'%還元'},
+      {items:['oldSet','oldSingle'],   top:'クーポン',     n:'20', u:'%OFF'},
+      {items:['newSingle'],            top:'クーポン',     n:'10', u:'%OFF'}
+    ],
+    cpn:[
+      {items:['newSet','oldSet'],          top:'クーポン', n:'20', u:'%OFF', plus:'入浴剤<wbr>2個'},
+      {items:['oldSingle'],                top:'クーポン', n:'20', u:'%OFF'},
+      {items:['newSingle','oil','mist'],   top:'クーポン', n:'10', u:'%OFF'}
+    ]
+  };
+
   // ---- 期間: 開始/終了は [日, 時]。終了は「その時刻まで」(翌日0時=[日+1,0]) ----
   var PERIODS=[
     {kind:'deal', s:[4,10],  e:[9,10],  t:['10:00〜','〜9:59']},
@@ -170,81 +198,65 @@ img{display:block;max-width:100%}
     {kind:'one', s:1,  e:1,  tag:'EVERY 1ST', n:'15', note:'お試し・コラボ<br>商品を除く', snote:'お試し<br>コラボ<br>除く'},
     {kind:'hw',  s:30, e:31, tag:'HALLOWEEN', n:'20', note:'ハロウィン<br>キャンペーン', snote:'ハロウィン'}
   ];
-
-  // ---- 商品(段) ----
-  var BASE='https://item.rakuten.co.jp/straine-onlineshop/';
-  var ROWS=[
-    {name:'新ライン<br>セット', tall:true, imgs:['img/t-new-set.jpg'], urls:[BASE+'ss-r037/'],
-      deal:{top:'DEALポイント',n:'20',u:'%還元',plus:'ベーシック<wbr>ヘアオイル<wbr>サシェ2包'},
-      cpn:{top:'クーポン',n:'20',u:'%OFF',plus:'入浴剤<wbr>2個'}},
-    {name:'新ライン<br>単品', imgs:['img/t-new-single.jpg'], urls:[BASE+'sb-001-004/'],
-      deal:{top:'クーポン',n:'10',u:'%OFF'},
-      cpn:{top:'クーポン',n:'10',u:'%OFF'}},
-    {name:'既存ライン<br>セット', imgs:['img/t-old-set.jpg'], urls:[BASE+'sb-001-001/'],
-      deal:{top:'クーポン',n:'20',u:'%OFF'},
-      cpn:{top:'クーポン',n:'20',u:'%OFF',plus:'入浴剤<wbr>2個'}},
-    {name:'既存ライン<br>単品', imgs:['img/t-old-single.jpg'], urls:[BASE+'sb-001-001/'],
-      deal:{top:'クーポン',n:'20',u:'%OFF'},
-      cpn:{top:'クーポン',n:'20',u:'%OFF'}},
-    {name:'ヘアオイル<br>ミルクミスト', imgs:['img/t-hair-oil.jpg','img/t-milk-mist.jpg'], urls:[BASE+'sb-003-001/',BASE+'sb-006-001/'],
-      deal:{top:'DEALポイント',n:'20',u:'%還元'},
-      cpn:{top:'クーポン',n:'10',u:'%OFF'}}
-  ];
+  var MIN_LANES=4; // 全品の日だけの週でもブロックの高さを確保する
 
   var firstDow=new Date(YEAR,MONTH-1,1).getDay();
-  // 日付→カレンダー上の通し位置(日単位)。週は7日ごと
-  function pos(day,hour){ return firstDow+(day-1)+hour/24; }
+  function pos(day,hour){ return firstDow+(day-1)+hour/24; }   // カレンダー上の通し位置(日単位)
   var weeks=Math.ceil((firstDow+DAYS)/7);
   var isSP=window.matchMedia('(max-width:767px)').matches;
 
-  function barHTML(v,kind,span,from,to,p,isFirst,isLast){
-    // span: この週に入っている長さ(日)。短い帯ほど情報を絞る
-    var cls='bar '+kind+(isFirst?'':' head-cut')+(span<1.5&&!isSP?' narrow':'');
-    var style='left:'+(from/7*100)+'%;width:'+((to-from)/7*100)+'%';
-    var showT=!isSP||span>=4;
-    var tS=(isFirst&&p.t&&showT)?'<span class="bar__t">'+p.t[0]+'</span>':'';
-    var tE=(isLast&&p.t&&showT)?'<span class="bar__t">'+p.t[1]+'</span>':'';
-    if(span<0.75) return '<div class="'+cls+' tiny" style="'+style+'"><span class="bar__t">'+(isFirst?p.t[0]:p.t[1]).replace(isSP?'〜':'','')+'</span></div>';
-    var main='<span class="bar__v">'+(span>=2.2||!isSP?v.top:'')+'<b>'+v.n+'</b>'+v.u+'</span>';
-    var plus=v.plus?'<span class="bar__plus">'+v.plus+'</span>':'';
-    return '<div class="'+cls+'" style="'+style+'">'+(span>=2.2?tS:'')+main+plus+(span>=2.2?tE:'')+'</div>';
+  function chips(o){
+    return '<div class="bar__imgs">'+o.items.map(function(k){
+      return '<a href="'+P[k].url+'"><img src="'+P[k].img+'" alt="'+P[k].alt+'"></a>';
+    }).join('')+'</div>';
+  }
+  function barHTML(o,p,span,from,isFirst,isLast){
+    var style='left:'+(from/7*100)+'%;width:'+(span/7*100)+'%';
+    var cls='bar '+p.kind+(isFirst?'':' head-cut');
+    var tS=(isFirst&&p.t)?p.t[0]:'', tE=(isLast&&p.t)?p.t[1]:'';
+    // 1日に満たない端切れは時刻だけ(続きは翌週の帯に全部載る)
+    if(span<0.75) return '<div class="'+cls+' tiny" style="'+style+'"><span class="bar__t">'+(isSP?(tS||tE).replace('〜',''):(tS||tE))+'</span></div>';
+    var stack=span<1.5;
+    var showT=!stack&&(!isSP||span>=4);
+    var txt='<div class="bar__txt">'+(showT&&tS?'<span class="bar__t">'+tS+'</span>':'')+
+      '<span class="bar__v">'+((stack&&isSP)?'':'<span>'+o.top+'</span>')+'<span class="bar__nu"><b>'+o.n+'</b>'+o.u+'</span></span>'+
+      (o.plus?'<span class="bar__plus">'+o.plus+'</span>':'')+
+      (showT&&tE?'<span class="bar__t">'+tE+'</span>':'')+'</div>';
+    return '<div class="'+cls+(stack?' stack':'')+(isSP&&span<4?' col':'')+'" style="'+style+'">'+chips(o)+txt+'</div>';
   }
 
   var dowName=['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  var h='<div class="dows"><div></div>'+dowName.map(function(d,i){return '<div class="'+(i===0?'sun':i===6?'sat':'')+'">'+d+'</div>'}).join('')+'</div>';
+  var h='<div class="dows">'+dowName.map(function(d,i){return '<div class="'+(i===0?'sun':i===6?'sat':'')+'">'+d+'</div>'}).join('')+'</div>';
 
   for(var w=0;w<weeks;w++){
     var w0=w*7, w1=w0+7;
-    h+='<div class="week"><div class="dates"><div></div>';
+    h+='<div class="week"><div class="dates">';
     for(var c=0;c<7;c++){
       var d=w0+c-firstDow+1;
-      if(d<1||d>DAYS){ h+='<div class="date out"></div>'; continue; }
-      var cls='date'+(c===0?' sun':c===6?' sat':'')+(HOLIDAYS[d]?' hol':'');
-      h+='<div class="'+cls+'">'+d+(HOLIDAYS[d]?'<small>祝</small>':'')+'</div>';
+      if(d<1||d>DAYS){ h+='<div class="date"></div>'; continue; }
+      h+='<div class="date'+(c===0?' sun':c===6?' sat':'')+(HOLIDAYS[d]?' hol':'')+'">'+d+(HOLIDAYS[d]?'<small>祝</small>':'')+'</div>';
     }
     h+='</div><div class="lanes">';
 
-    ROWS.forEach(function(r){
-      h+='<div class="lane'+(r.tall?' tall':'')+'"><div class="lane__label"><div class="lane__imgs'+(r.imgs.length>1?' two':'')+'">'+
-        r.imgs.map(function(src,i){return '<a href="'+r.urls[i]+'"><img src="'+src+'" alt=""></a>'}).join('')+
-        '</div><p class="lane__name">'+r.name+'</p></div><div class="track">';
-      PERIODS.forEach(function(p){
-        var a=pos(p.s[0],p.s[1]), b=pos(p.e[0],p.e[1]);
-        var from=Math.max(a,w0), to=Math.min(b,w1);
-        if(to<=from) return;
-        h+=barHTML(r[p.kind],p.kind,to-from,from-w0,to-w0,p,a>=w0,b<=w1);
+    // この週にかかる期間の帯を、段(施策の並び順)ごとに配置
+    var laneHtml=[];
+    PERIODS.forEach(function(p){
+      var a=pos(p.s[0],p.s[1]), b=pos(p.e[0],p.e[1]);
+      var from=Math.max(a,w0), to=Math.min(b,w1);
+      if(to<=from) return;
+      OFFERS[p.kind].forEach(function(o,i){
+        laneHtml[i]=(laneHtml[i]||'')+barHTML(o,p,to-from,from-w0,a>=w0,b<=w1);
       });
-      h+='</div></div>';
     });
+    var n=Math.max(laneHtml.length,MIN_LANES);
+    for(var i=0;i<n;i++) h+='<div class="lane">'+(laneHtml[i]||'')+'</div>';
 
-    // 全品ブロック(商品段の上にかぶせる)
+    // 全品ブロック(段の上にかぶせる)
     ALLDAYS.forEach(function(x){
       var a=pos(x.s,0), b=pos(x.e+1,0);
       var from=Math.max(a,w0), to=Math.min(b,w1);
       if(to<=from) return;
-      var left='calc(var(--left) + (100% - var(--left)) * '+((from-w0)/7)+')';
-      var width='calc((100% - var(--left)) * '+((to-from)/7)+' - 4px)';
-      h+='<div class="all '+x.kind+'" style="left:'+left+';width:'+width+'">'+
+      h+='<div class="all '+x.kind+'" style="left:'+((from-w0)/7*100)+'%;width:calc('+((to-from)/7*100)+'% - 4px)">'+
         '<p class="all__tag">'+x.tag+'</p><p class="all__word">全品</p><p class="all__n">'+x.n+'</p><p class="all__u">%OFF</p>'+
         '<p class="all__note">'+(isSP?x.snote:x.note)+'</p></div>';
     });
