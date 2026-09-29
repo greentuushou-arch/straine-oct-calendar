@@ -14,164 +14,126 @@
   --sub:#8A7F83;
   --line:#E6DCDC;
   --rose:#C9747E;      /* DEAL期間 */
-  --rose-tint:#F6E3E4;
+  --rose-tint:#FBEDEE;
   --slate:#6D7A8C;     /* クーポン期間 */
-  --slate-tint:#E4E8EE;
+  --slate-tint:#EDF0F4;
   --gold:#B8955A;      /* 1日 */
-  --gold-tint:#F3EAD8;
   --night:#2F2A33;     /* ハロウィン */
   --pumpkin:#E6904A;
-  --sun:#C9747E;
-  --sat:#6D7A8C;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.en{font-family:"Jost",sans-serif}
+body{background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.sp{display:none}
 img{display:block;max-width:100%}
-.wrap{max-width:1080px;margin:0 auto;padding:0 40px}
+.sp{display:none}
+.wrap{max-width:1320px;margin:0 auto;padding:0 20px}
 
 /* ---------- Header ---------- */
-.head{padding:72px 0 48px;display:grid;grid-template-columns:auto 1fr;column-gap:40px;align-items:end}
-.head__month{font-family:"Jost";font-weight:300;font-size:220px;line-height:.78;letter-spacing:-.04em;color:var(--rose)}
-.head__brand{font-family:"Jost";font-weight:500;font-size:15px;letter-spacing:.32em;color:var(--sub)}
-.head__title{font-weight:900;font-size:52px;line-height:1.25;letter-spacing:.04em;margin-top:10px}
-.head__lead{margin-top:14px;font-size:17px;color:var(--sub)}
-.head__rule{grid-column:1/-1;height:2px;background:var(--ink);margin-top:40px}
+.head{padding:56px 0 32px;display:grid;grid-template-columns:auto 1fr auto;column-gap:32px;align-items:end}
+.head__month{font-family:"Jost";font-weight:300;font-size:168px;line-height:.78;letter-spacing:-.04em;color:var(--rose)}
+.head__brand{font-family:"Jost";font-weight:500;font-size:14px;letter-spacing:.32em;color:var(--sub)}
+.head__title{font-weight:900;font-size:46px;line-height:1.25;letter-spacing:.04em;margin-top:8px}
+.legend{display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:700;padding-bottom:4px}
+.legend span{display:inline-flex;align-items:center;gap:10px}
+.legend i{width:30px;height:14px;display:inline-block}
+.k-deal i{background:var(--rose)}.k-cpn i{background:var(--slate)}
+.k-one i{background:var(--gold)}.k-hw i{background:var(--night)}
 
-/* ---------- Calendar ---------- */
-.cal{padding:8px 0 24px}
-.legend{display:flex;flex-wrap:wrap;gap:10px 28px;margin-bottom:20px;font-size:15px;font-weight:700}
-.legend span{display:inline-flex;align-items:center;gap:8px}
-.legend i{width:26px;height:14px;display:inline-block}
-.legend .k-one i{background:var(--gold)}
-.legend .k-deal i{background:var(--rose)}
-.legend .k-cpn i{background:var(--slate)}
-.legend .k-hw i{background:var(--night)}
+/* ---------- Board (PC): 行=商品 / 列=期間 ---------- */
+.board{display:grid;grid-template-columns:210px 92px 22px minmax(0,1.3fr) minmax(0,1fr) 22px minmax(0,1.3fr) minmax(0,1fr) 22px minmax(0,1.3fr) 22px 116px;
+  column-gap:6px;row-gap:8px;padding:22px 20px 26px;background:#fff;border-top:3px solid var(--ink)}
+.hd{padding:12px 10px 14px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;min-height:128px}
+.hd__kind{font-weight:700;font-size:14px;letter-spacing:.04em}
+.hd__big{font-family:"Jost";font-weight:500;font-size:35px;line-height:1;letter-spacing:-.02em;margin-top:4px;white-space:nowrap}
+.hd__big small{font-size:.5em;margin-left:2px}
+.hd__time{font-family:"Jost";font-weight:500;font-size:13px;line-height:1.45;margin-top:8px;white-space:nowrap}
+.hd.deal{background:var(--rose)}.hd.cpn{background:var(--slate)}
+.hd.one{background:var(--gold)}.hd.hw{background:var(--night)}
+.hd.hw .hd__big{color:var(--pumpkin)}
+.hd.corner{background:none;color:var(--ink);justify-content:flex-end;padding-left:0}
+.hd.corner p{font-weight:700;font-size:15px}
+.gaphd,.gap{display:flex;justify-content:center;align-items:flex-end}
+.gaphd{padding-bottom:14px;font-family:"Jost";font-weight:500;font-size:14px;color:#B5AAAE;writing-mode:vertical-rl;align-items:center;justify-content:flex-end}
+.gap{background:repeating-linear-gradient(180deg,var(--line) 0 6px,transparent 6px 12px);width:2px;justify-self:center}
 
-.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:1px solid var(--ink)}
-.dow{font-family:"Jost";font-weight:500;font-size:14px;letter-spacing:.14em;text-align:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.dow.sun{color:var(--sun)}.dow.sat{color:var(--sat)}
-.day{position:relative;min-height:124px;padding:10px 12px;border-bottom:1px solid var(--line);background:#fff}
-.day+.day{box-shadow:inset 1px 0 0 var(--line)}
-.day.blank{background:transparent}
-.day__num{font-family:"Jost";font-weight:400;font-size:34px;line-height:1}
-.day.sun .day__num{color:var(--sun)}.day.sat .day__num{color:var(--sat)}
-.day__tag{position:absolute;left:0;right:0;bottom:0;height:50px;padding:7px 10px 0;color:#fff;font-weight:700;font-size:15px;line-height:1.25;white-space:nowrap;overflow:hidden}
-.day__tag small{display:block;font-family:"Jost";font-weight:500;font-size:13px;opacity:.9}
-.day.one{background:var(--gold-tint)}.day.one .day__tag{background:var(--gold)}
-.day.deal{background:var(--rose-tint)}.day.deal .day__tag{background:var(--rose)}
-.day.cpn{background:var(--slate-tint)}.day.cpn .day__tag{background:var(--slate)}
-.day.hw{background:#E9E4EC}.day.hw .day__tag{background:var(--night)}
-.day.hw .day__tag b{color:var(--pumpkin)}
-/* 同じ期間の続きの日はラベルを省略して帯だけつなぐ */
-.day.cont .day__tag{color:transparent}
-.day.cont .day__tag small{color:#fff}
-.day.today::after{content:"TODAY";position:absolute;top:12px;right:10px;font-family:"Jost";font-weight:600;font-size:11px;letter-spacing:.12em;color:#fff;background:var(--ink);padding:2px 7px}
+.prod{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding-right:4px}
+.prod__imgs{display:flex;gap:4px;height:92px;width:90px;align-items:center;justify-content:center}
+.prod__imgs img{max-height:92px;max-width:90px;width:auto;height:auto}
+.prod__imgs.two img{max-width:44px}
+.prod__line{font-family:"Jost";font-weight:500;font-size:11px;letter-spacing:.14em;color:var(--sub)}
+.prod__name{font-weight:900;font-size:17px;line-height:1.35}
 
-/* ---------- Section title ---------- */
-.sec{padding:88px 0 0}
-.sec__eyebrow{font-family:"Jost";font-weight:500;font-size:14px;letter-spacing:.3em;color:var(--sub)}
-.sec__title{font-weight:900;font-size:38px;line-height:1.35;margin-top:6px}
-.sec__lead{margin-top:10px;font-size:16px;color:var(--sub)}
+/* 期間の帯。右端を矢印にして「期間が流れる」ことを示す */
+.bar{position:relative;padding:12px 22px 12px 14px;display:flex;flex-direction:column;justify-content:center;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%)}
+.bar.deal{background:var(--rose-tint);box-shadow:inset 4px 0 0 var(--rose)}
+.bar.cpn{background:var(--slate-tint);box-shadow:inset 4px 0 0 var(--slate)}
+.bar__top{font-weight:700;font-size:13px;line-height:1.3}
+.bar__v{font-weight:700;font-size:14px;line-height:1.1;margin-top:2px;white-space:nowrap}
+.bar__v b{font-family:"Jost";font-weight:500;font-size:36px;letter-spacing:-.01em}
+.deal .bar__v b{color:var(--rose)}.cpn .bar__v b{color:var(--slate)}
+.bar__plus{margin-top:6px;font-weight:700;font-size:13px;line-height:1.4;padding-left:1em;text-indent:-1em;word-break:keep-all}
+.bar__plus::before{content:"＋";font-weight:900}
+.deal .bar__plus::before{color:var(--rose)}.cpn .bar__plus::before{color:var(--slate)}
 
-/* ---------- 1日 / ハロウィン ---------- */
-.allday{margin-top:28px;display:grid;grid-template-columns:340px 1fr;align-items:center;border-top:2px solid var(--gold);border-bottom:1px solid var(--line);padding:30px 0}
-.allday__date{font-family:"Jost";font-weight:300;font-size:64px;line-height:1;color:var(--gold);white-space:nowrap}
-.allday__date small{display:block;font-family:"Noto Sans JP";font-weight:700;font-size:15px;color:var(--ink);margin-top:10px;letter-spacing:.04em}
-.allday__what{font-weight:900;font-size:34px;line-height:1.3}
-.allday__what .big{font-family:"Jost";font-weight:500;font-size:84px;line-height:1;letter-spacing:-.02em;color:var(--gold);vertical-align:-6px;margin:0 4px}
-.allday__note{margin-top:8px;font-size:15px;color:var(--sub)}
-.allday.hw{border-top-color:var(--night);background:var(--night);color:#fff;padding:36px 40px;margin-top:0}
-.allday.hw .allday__date{color:var(--pumpkin)}
-.allday.hw .allday__date small{color:#fff}
-.allday.hw .big{color:var(--pumpkin)}
+/* 全品の日は商品行をまたぐ1本の縦ブロック */
+.all{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 6px;color:#fff}
+.all.one{background:var(--gold)}
+.all.hw{background:var(--night)}
+.all__word{font-weight:900;font-size:22px;writing-mode:vertical-rl;letter-spacing:.2em}
+.all__n{font-family:"Jost";font-weight:500;font-size:46px;line-height:1;margin-top:14px}
+.all.hw .all__n{color:var(--pumpkin)}
+.all__u{font-family:"Jost";font-weight:600;font-size:18px}
+.all__note{margin-top:14px;font-size:12px;line-height:1.5;font-weight:500}
+.all__tag{font-family:"Jost";font-weight:500;font-size:12px;letter-spacing:.2em;margin-bottom:14px;opacity:.85}
 
-/* ---------- Matrix ---------- */
-.mx{margin-top:32px;border-top:2px solid var(--ink)}
-.mx__head,.mx__row{display:grid;grid-template-columns:400px 1fr 1fr}
-.mx__head>div{padding:22px 24px}
-.mx__head .h-deal{background:var(--rose);color:#fff}
-.mx__head .h-cpn{background:var(--slate);color:#fff}
-.mx__name{font-weight:900;font-size:24px;line-height:1.3}
-.mx__dates{margin-top:10px;font-family:"Jost";font-weight:500;font-size:17px;line-height:1.55}
-.mx__dates>span{display:block}
-.mx__dates em{font-style:normal;font-size:13px;opacity:.85;margin-left:4px}
-.mx__row{border-bottom:1px solid var(--line)}
-.mx__prod{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;padding:18px 20px 18px 0}
-.mx__img{height:120px;display:flex;align-items:center;justify-content:center}
-.mx__img img{max-height:120px;max-width:150px;width:auto;height:auto}
-.mx__line{font-family:"Jost";font-weight:500;font-size:12px;letter-spacing:.18em;color:var(--sub)}
-.mx__pname{font-weight:700;font-size:19px;line-height:1.35}
-.mx__cell{padding:20px 24px;display:flex;flex-direction:column;justify-content:center}
-.mx__cell.c-deal{background:#FDF5F5}
-.mx__cell.c-cpn{background:#F4F6F9}
-.v{font-weight:700;font-size:17px;line-height:1.35}
-.v .n{font-family:"Jost";font-weight:500;font-size:40px;line-height:1;letter-spacing:-.01em;margin-right:2px}
-.c-deal .n{color:var(--rose)}
-.c-cpn .n{color:var(--slate)}
-.v .u{font-size:17px}
-.plus{margin-top:10px;font-weight:700;font-size:16px;line-height:1.45;padding-left:1.1em;text-indent:-1.1em}
-.plus::before{content:"＋";font-weight:900;margin-right:.1em}
-.c-deal .plus::before{color:var(--rose)}
-.c-cpn .plus::before{color:var(--slate)}
-.mx__prod a:hover .mx__pname{text-decoration:underline}
+.notes{margin:18px 0 0;font-size:14px;color:var(--sub)}
+.foot{padding:72px 0}
 
-.notes{margin:40px 0 0;font-size:14px;color:var(--sub);line-height:1.9}
-.foot{padding:96px 0 72px}
+/* ---------- Board (SP): 行=期間 / 列=商品 ---------- */
+.sboard{display:none}
 
-/* ---------- SP ---------- */
 @media (max-width:767px){
   .sp{display:inline}
-  .wrap{padding:0 16px}
-  .head{padding:40px 0 28px;grid-template-columns:1fr;row-gap:0}
-  .head__month{font-size:132px}
-  .head__brand{margin-top:22px;font-size:12px}
-  .head__title{font-size:32px;margin-top:6px}
-  .head__lead{font-size:15px}
-  .head__rule{margin-top:26px}
-
-  .legend{gap:8px 18px;font-size:13px}
-  .legend i{width:18px;height:11px}
-  .dow{font-size:11px;letter-spacing:.06em;padding:8px 0}
-  .day{min-height:84px;padding:6px 5px}
-  .day__num{font-size:21px}
-  .day__tag{height:34px;padding:4px 4px 0;font-size:11px;letter-spacing:-.02em}
-  .day__tag small{font-size:10px}
-  .day.today::after{top:6px;right:4px;font-size:8px;padding:1px 4px}
-
-  .sec{padding:60px 0 0}
-  .sec__title{font-size:26px}
-  .sec__lead{font-size:14px}
-
-  .allday{grid-template-columns:1fr;padding:24px 0}
-  .allday__date{font-size:44px}
-  .allday__what{margin-top:14px;font-size:24px}
-  .allday__what .big{font-size:60px}
-  .allday.hw{padding:28px 20px}
-
-  /* 行ごとに「商品」→「DEAL｜クーポン」を2段で見せる */
-  .mx__head{grid-template-columns:1fr 1fr}
-  .mx__head .h-blank{display:none}
-  .mx__head>div{padding:14px 12px}
-  .mx__name{font-size:17px}
-  .mx__dates{font-size:14px;margin-top:6px}
-  .mx__dates>span{margin-bottom:6px}
-  .mx__dates .to{display:block}
-  .mx__dates em{font-size:11px}
-  .mx__row{grid-template-columns:1fr 1fr}
-  .mx__prod{grid-column:1/-1;grid-template-columns:110px 1fr;gap:14px;padding:16px 0 12px}
-  .mx__img{height:84px}
-  .mx__img img{max-height:84px;max-width:110px}
-  .mx__pname{font-size:16px}
-  .mx__cell{padding:12px 12px 14px}
-  .v{font-size:14px}
-  .v .n{font-size:30px}
-  .v .u{font-size:14px}
-  .plus{font-size:13px;margin-top:6px}
-  .notes{font-size:12px}
-  .foot{padding:60px 0 48px}
+  .wrap{padding:0 12px}
+  .head{padding:34px 4px 22px;grid-template-columns:auto 1fr;column-gap:14px}
+  .head__month{font-size:96px}
+  .head__brand{font-size:10px;letter-spacing:.22em}
+  .head__title{font-size:26px;margin-top:4px}
+  .legend{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;gap:6px 16px;font-size:12px;margin-top:22px}
+  .legend i{width:18px;height:10px}
+  .board{display:none}
+  .sboard{display:grid;grid-template-columns:54px repeat(5,minmax(0,1fr));column-gap:3px;row-gap:5px;background:#fff;border-top:3px solid var(--ink);padding:12px 6px 16px}
+  .sp-prod{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding-bottom:4px}
+  .sp-prod{min-width:0}
+  .sp-prod .prod__imgs{height:56px;width:100%;gap:2px}
+  .sp-prod .prod__imgs img{max-height:56px;max-width:100%}
+  .sp-prod .prod__imgs.two a{flex:1;min-width:0}
+  .sp-prod p{font-weight:700;font-size:9px;line-height:1.3;letter-spacing:-.03em}
+  .sp-hd{color:#fff;padding:7px 4px;min-width:0;display:flex;flex-direction:column;justify-content:center}
+  .sp-hd.deal{background:var(--rose)}.sp-hd.cpn{background:var(--slate)}
+  .sp-hd.one{background:var(--gold)}.sp-hd.hw{background:var(--night)}
+  .sp-hd .hd__kind{font-size:8.5px;letter-spacing:-.02em}
+  .sp-hd .hd__big{font-size:17px;margin-top:2px;letter-spacing:-.04em}
+  .sp-hd.hw .hd__big{color:var(--pumpkin)}
+  .sp-hd .hd__time{font-size:8.5px;margin-top:3px;line-height:1.35;white-space:normal;letter-spacing:-.02em}
+  .sp-gap{grid-column:1/-1;font-family:"Jost";font-weight:500;font-size:11px;color:#B5AAAE;padding:0 0 0 8px;border-left:2px dotted var(--line);margin-left:26px}
+  .sbar{min-width:0;padding:7px 3px 8px;display:flex;flex-direction:column;justify-content:center}
+  .sbar.deal{background:var(--rose-tint);box-shadow:inset 0 3px 0 var(--rose)}
+  .sbar.cpn{background:var(--slate-tint);box-shadow:inset 0 3px 0 var(--slate)}
+  .sbar .bar__top{font-size:8.5px;letter-spacing:-.02em}
+  .sbar .bar__v{font-size:9px;margin-top:1px;letter-spacing:-.03em}
+  .sbar .bar__v b{font-size:18px}
+  .sbar .bar__plus{font-size:8.5px;margin-top:4px;line-height:1.4;padding-left:0;text-indent:0;letter-spacing:-.03em}
+  .sall{grid-column:2 / -1;color:#fff;display:flex;align-items:center;gap:10px;padding:10px 12px}
+  .sall.one{background:var(--gold)}.sall.hw{background:var(--night)}
+  .sall .all__word{writing-mode:horizontal-tb;font-size:17px;letter-spacing:.06em}
+  .sall .all__n{font-size:40px;margin:0}
+  .sall.hw .all__n{color:var(--pumpkin)}
+  .sall .all__u{font-size:16px}
+  .sall .all__note{margin:0 0 0 auto;font-size:10px;text-align:right}
+  .notes{font-size:11px;margin-top:12px;padding:0 4px}
+  .foot{padding:40px 0}
 }
 </style>
 </head>
@@ -179,149 +141,115 @@ img{display:block;max-width:100%}
 <div class="wrap">
 
   <header class="head">
-    <div class="head__month en">10</div>
+    <div class="head__month">10</div>
     <div>
       <p class="head__brand">STRAINE STORE ／ OCTOBER 2026</p>
-      <h1 class="head__title">10月のおトク<br>カレンダー</h1>
-      <p class="head__lead">いつ、どの商品がおトクになるのか<br class="sp">まとめました。</p>
+      <h1 class="head__title">10月のおトク<br class="sp">カレンダー</h1>
     </div>
-    <div class="head__rule"></div>
-  </header>
-
-  <section class="cal" aria-label="10月のカレンダー">
     <div class="legend">
-      <span class="k-one"><i></i>1日 全品15%OFF</span>
       <span class="k-deal"><i></i>DEAL期間</span>
       <span class="k-cpn"><i></i>クーポン期間</span>
-      <span class="k-hw"><i></i>ハロウィン 全品20%OFF</span>
+      <span class="k-one"><i></i>毎月1日</span>
+      <span class="k-hw"><i></i>ハロウィン</span>
     </div>
-    <div class="grid" id="grid"></div>
-  </section>
+  </header>
 
-  <section class="sec">
-    <p class="sec__eyebrow en">EVERY 1ST</p>
-    <h2 class="sec__title">毎月1日は全品おトク</h2>
-    <div class="allday">
-      <p class="allday__date">10.1<small>木曜日 0:00〜23:59</small></p>
-      <div>
-        <p class="allday__what">全品<span class="big">15</span>%OFF</p>
-        <p class="allday__note">※お試し・コラボ商品を除く</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <p class="sec__eyebrow en">2 PATTERNS</p>
-    <h2 class="sec__title">DEAL期間とクーポン期間</h2>
-    <p class="sec__lead">期間によって、おトクになる商品と内容が変わります。</p>
-
-    <div class="mx" id="mx">
-      <div class="mx__head">
-        <div class="h-blank"></div>
-        <div class="h-deal">
-          <p class="mx__name">DEAL期間</p>
-          <p class="mx__dates"><span>10/4<em>10:00</em> <span class="to">— 10/9<em>9:59</em></span></span><span>10/14<em>10:00</em> <span class="to">— 10/17<em>9:59</em></span></span><span>10/24<em>10:00</em> <span class="to">— 10/27<em>9:59</em></span></span></p>
-        </div>
-        <div class="h-cpn">
-          <p class="mx__name">クーポン期間</p>
-          <p class="mx__dates"><span>10/10<em>終日</em></span><span>10/18 <span class="to">— 10/20<em>終日</em></span></span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <p class="sec__eyebrow en">HALLOWEEN</p>
-    <h2 class="sec__title">月末は<br class="sp">ハロウィンキャンペーン</h2>
-    <div class="allday hw" style="margin-top:28px">
-      <p class="allday__date">10.30 — 31<small>金・土曜日 0:00〜23:59</small></p>
-      <div>
-        <p class="allday__what">全品<span class="big">20</span>%OFF</p>
-      </div>
-    </div>
-  </section>
+  <div class="board" id="board"></div>
+  <div class="sboard" id="sboard"></div>
+  <p class="notes">※毎月1日の全品15%OFFは、お試し・コラボ商品を除く</p>
 
   <div class="foot"></div>
 </div>
 
 <script>
 (function(){
-  // ---- 期間定義(カレンダー用) ----
-  // type: one=1日 / deal=DEAL期間 / cpn=クーポン期間 / hw=ハロウィン
+  // ---- 期間(列) ----
   var PERIODS=[
-    {type:'one', from:1, to:1,  label:'全品', sub:'15%OFF'},
-    {type:'deal',from:4, to:9,  label:'DEAL', start:'10:00〜', end:'〜9:59'},
-    {type:'cpn', from:10,to:10, label:'クーポン'},
-    {type:'deal',from:14,to:17, label:'DEAL', start:'10:00〜', end:'〜9:59'},
-    {type:'cpn', from:18,to:20, label:'クーポン'},
-    {type:'deal',from:24,to:27, label:'DEAL', start:'10:00〜', end:'〜9:59'},
-    {type:'hw',  from:30,to:31, label:'全品', sub:'20%OFF'}
+    {id:'one', kind:'one', label:'毎月1日',   big:'1',     t:['10/1(木)','終日']},
+    {gap:'2・3'},
+    {id:'a1', kind:'deal',label:'DEAL期間',slabel:'DEAL',   big:'4–9',   t:['10/4(日) 10:00〜','10/9(金) 9:59まで']},
+    {id:'b1', kind:'cpn', label:'クーポン期間',slabel:'クーポン',big:'10',    t:['10/10(土)','終日']},
+    {gap:'11–13'},
+    {id:'a2', kind:'deal',label:'DEAL期間',slabel:'DEAL',   big:'14–17', t:['10/14(水) 10:00〜','10/17(土) 9:59まで']},
+    {id:'b2', kind:'cpn', label:'クーポン期間',slabel:'クーポン',big:'18–20', t:['10/18(日)〜','10/20(火) 終日']},
+    {gap:'21–23'},
+    {id:'a3', kind:'deal',label:'DEAL期間',slabel:'DEAL',   big:'24–27', t:['10/24(土) 10:00〜','10/27(火) 9:59まで']},
+    {gap:'28・29'},
+    {id:'hw', kind:'hw',  label:'ハロウィン', big:'30–31', t:['10/30(金)〜','10/31(土) 終日']}
   ];
-  var YEAR=2026, MONTH=10, DAYS=31;
-  var firstDow=new Date(YEAR,MONTH-1,1).getDay();
-  var DOW=['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  var grid=document.getElementById('grid');
-  var html=DOW.map(function(d,i){return '<div class="dow '+(i===0?'sun':i===6?'sat':'')+'">'+d+'</div>'}).join('');
-  for(var b=0;b<firstDow;b++) html+='<div class="day blank"></div>';
+  var ALL={
+    one:{word:'全品',n:'15',u:'%OFF',tag:'EVERY 1ST',note:'お試し・<br>コラボ商品<br>を除く',sn:'お試し・コラボ<br>商品を除く'},
+    hw:{word:'全品',n:'20',u:'%OFF',tag:'HALLOWEEN',note:'ハロウィン<br>キャンペーン',sn:'ハロウィン<br>キャンペーン'}
+  };
 
-  var isShot=/[?&]shot=/.test(location.search);
-  // 画像書き出し用: ?shot=sp で本文幅を390pxに固定(ヘッドレスChromeの最小ウィンドウ幅対策)
-  if(/[?&]shot=sp/.test(location.search)) document.body.style.width='390px';
-  var now=new Date();
-  var todayNum=(!isShot && now.getFullYear()===YEAR && now.getMonth()===MONTH-1)?now.getDate():0;
-
-  for(var d=1;d<=DAYS;d++){
-    var dow=(firstDow+d-1)%7;
-    var p=PERIODS.filter(function(x){return d>=x.from&&d<=x.to})[0];
-    var cls=['day', dow===0?'sun':dow===6?'sat':''];
-    var tag='';
-    if(p){
-      cls.push(p.type);
-      var isStart=d===p.from, isEnd=d===p.to;
-      // 週の頭(日曜)で帯が折り返す場合はラベルを出し直す
-      var showLabel=isStart||dow===0;
-      if(!showLabel) cls.push('cont');
-      var small=p.sub||(isStart&&p.start)||(isEnd&&p.end)||'';
-      tag='<div class="day__tag">'+(showLabel?p.label:'&nbsp;')+(small?'<small>'+small+'</small>':'')+'</div>';
-    }
-    if(d===todayNum) cls.push('today');
-    html+='<div class="'+cls.join(' ')+'"><p class="day__num">'+d+'</p>'+tag+'</div>';
-  }
-  grid.innerHTML=html;
-
-  // ---- 商品×期間の表 ----
+  // ---- 商品(行)。deal=DEAL期間 / cpn=クーポン期間 の内容 ----
   var BASE='https://item.rakuten.co.jp/straine-onlineshop/';
   var ROWS=[
-    {line:'NEW LINE',     name:'新ライン セット',   img:'img/t-new-set.jpg',    url:BASE+'ss-r037/',
-      deal:{n:'20',u:'%還元',pre:'DEALポイント',plus:'ベーシックヘアオイルサシェ2包'},
-      cpn:{n:'20',u:'%OFF',pre:'クーポン',plus:'入浴剤2個'}},
-    {line:'NEW LINE',     name:'新ライン 単品',     img:'img/t-new-single.jpg', url:BASE+'sb-001-004/',
-      deal:{n:'10',u:'%OFF',pre:'クーポン'},
-      cpn:{n:'10',u:'%OFF',pre:'クーポン'}},
-    {line:'STANDARD LINE',name:'既存ライン セット', img:'img/t-old-set.jpg',    url:BASE+'sb-001-001/',
-      deal:{n:'20',u:'%OFF',pre:'クーポン'},
-      cpn:{n:'20',u:'%OFF',pre:'クーポン',plus:'入浴剤2個'}},
-    {line:'STANDARD LINE',name:'既存ライン 単品',   img:'img/t-old-single.jpg', url:BASE+'sb-001-001/',
-      deal:{n:'20',u:'%OFF',pre:'クーポン'},
-      cpn:{n:'20',u:'%OFF',pre:'クーポン'}},
-    {line:'HAIR OIL',     name:'ヘアオイル',        img:'img/t-hair-oil.jpg',   url:BASE+'sb-003-001/',
-      deal:{n:'20',u:'%還元',pre:'DEALポイント'},
-      cpn:{n:'10',u:'%OFF',pre:'クーポン'}},
-    {line:'MILK MIST',    name:'ミルクミスト',      img:'img/t-milk-mist.jpg',  url:BASE+'sb-006-001/',
-      deal:{n:'20',u:'%還元',pre:'DEALポイント'},
-      cpn:{n:'10',u:'%OFF',pre:'クーポン'}}
+    {line:'NEW LINE', name:'新ライン<br>セット', imgs:['img/t-new-set.jpg'], url:BASE+'ss-r037/',
+      deal:{top:'DEALポイント',stop:'ポイント',n:'20',u:'%還元',plus:'ベーシックヘア<wbr>オイル<wbr>サシェ2包'},
+      cpn:{top:'クーポン',n:'20',u:'%OFF',plus:'入浴剤2個'}},
+    {line:'NEW LINE', name:'新ライン<br>単品', imgs:['img/t-new-single.jpg'], url:BASE+'sb-001-004/',
+      deal:{top:'クーポン',n:'10',u:'%OFF'},
+      cpn:{top:'クーポン',n:'10',u:'%OFF'}},
+    {line:'STANDARD LINE', name:'既存ライン<br>セット', imgs:['img/t-old-set.jpg'], url:BASE+'sb-001-001/',
+      deal:{top:'クーポン',n:'20',u:'%OFF'},
+      cpn:{top:'クーポン',n:'20',u:'%OFF',plus:'入浴剤2個'}},
+    {line:'STANDARD LINE', name:'既存ライン<br>単品', imgs:['img/t-old-single.jpg'], url:BASE+'sb-001-001/',
+      deal:{top:'クーポン',n:'20',u:'%OFF'},
+      cpn:{top:'クーポン',n:'20',u:'%OFF'}},
+    {line:'HAIR OIL / MILK MIST', name:'ヘアオイル<br>ミルクミスト', imgs:['img/t-hair-oil.jpg','img/t-milk-mist.jpg'], url:BASE+'sb-003-001/', urls:[BASE+'sb-003-001/',BASE+'sb-006-001/'],
+      deal:{top:'DEALポイント',stop:'ポイント',n:'20',u:'%還元'},
+      cpn:{top:'クーポン',n:'10',u:'%OFF'}}
   ];
-  function cell(v,kind){
-    return '<div class="mx__cell c-'+kind+'"><p class="v">'+v.pre+'<br><span class="n">'+v.n+'</span><span class="u">'+v.u+'</span></p>'+
-      (v.plus?'<p class="plus">'+v.plus+'</p>':'')+'</div>';
+
+  function imgs(r){
+    var urls=r.urls||[r.url];
+    return '<div class="prod__imgs'+(r.imgs.length>1?' two':'')+'">'+r.imgs.map(function(src,i){
+      return '<a href="'+urls[i]+'"><img src="'+src+'" alt=""></a>';
+    }).join('')+'</div>';
   }
-  var mx=document.getElementById('mx');
-  mx.insertAdjacentHTML('beforeend',ROWS.map(function(r){
-    return '<div class="mx__row">'+
-      '<a class="mx__prod" href="'+r.url+'"><div class="mx__img"><img src="'+r.img+'" alt="'+r.name+'" ></div>'+
-      '<div><p class="mx__line">'+r.line+'</p><p class="mx__pname">'+r.name+'</p></div></a>'+
-      cell(r.deal,'deal')+cell(r.cpn,'cpn')+'</div>';
-  }).join(''));
+  function barInner(v,sp){
+    return '<p class="bar__top">'+(sp&&v.stop?v.stop:v.top)+'</p><p class="bar__v"><b>'+v.n+'</b>'+v.u+'</p>'+
+      (v.plus?'<p class="bar__plus">'+v.plus+'</p>':'');
+  }
+  function hd(p,cls){
+    var lb=(cls==='sp-hd'&&p.slabel)?p.slabel:p.label;
+    return '<div class="'+cls+' '+p.kind+'"><p class="hd__kind">'+lb+'</p><p class="hd__big">'+p.big+'</p>'+
+      '<p class="hd__time">'+p.t[0]+'<br>'+p.t[1]+'</p></div>';
+  }
+  function allBlock(k,cls,sp){
+    var a=ALL[k];
+    if(sp) return '<div class="sall '+k+'"><span class="all__word">'+a.word+'</span><span><span class="all__n">'+a.n+'</span><span class="all__u">'+a.u+'</span></span><span class="all__note">'+a.sn+'</span></div>';
+    return '<div class="all '+k+'"><p class="all__tag">'+a.tag+'</p><p class="all__word">'+a.word+'</p><p class="all__n">'+a.n+'</p><p class="all__u">'+a.u+'</p><p class="all__note">'+a.note+'</p></div>';
+  }
+
+  // ---- PC ---- (全品ブロックが行をまたぐので、全セルの行・列を明示する)
+  function at(html,col,row){ return html.replace(/^<div /,'<div style="grid-column:'+col+';grid-row:'+row+'" '); }
+  var h=at('<div class="hd corner"><p>いつ・どの商品が<br>おトクになるか</p></div>',1,1);
+  PERIODS.forEach(function(p,pi){
+    var c=pi+2;
+    h+=at(p.gap?'<div class="gaphd">'+p.gap+'</div>':hd(p,'hd'),c,1);
+    if(p.gap){ h+=at('<div class="gap"></div>',c,'2 / span '+ROWS.length); return; }
+    if(ALL[p.kind]){ h+=at(allBlock(p.kind),c,'2 / span '+ROWS.length); return; }
+    ROWS.forEach(function(r,ri){ h+=at('<div class="bar '+p.kind+'">'+barInner(r[p.kind])+'</div>',c,ri+2); });
+  });
+  ROWS.forEach(function(r,ri){
+    h+=at('<div class="prod">'+imgs(r)+'<div><p class="prod__line">'+r.line+'</p><p class="prod__name">'+r.name+'</p></div></div>',1,ri+2);
+  });
+  document.getElementById('board').innerHTML=h;
+
+  // ---- SP: 縦横を入れ替え ----
+  var s='<div></div>';
+  ROWS.forEach(function(r){ s+='<div class="sp-prod">'+imgs(r)+'<p>'+r.name+'</p></div>'; });
+  PERIODS.forEach(function(p){
+    if(p.gap){ s+='<div class="sp-gap">'+p.gap+'</div>'; return; }
+    s+=hd(p,'sp-hd');
+    if(ALL[p.kind]){ s+=allBlock(p.kind,'',true); return; }
+    ROWS.forEach(function(r){ s+='<div class="sbar '+p.kind+'">'+barInner(r[p.kind],true)+'</div>'; });
+  });
+  document.getElementById('sboard').innerHTML=s;
+
+  if(/[?&]shot=sp/.test(location.search)) document.body.style.width='390px';
 })();
 </script>
 </body>
